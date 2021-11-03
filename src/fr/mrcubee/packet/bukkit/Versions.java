@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 /**
  * @author MrCubee
  * @since 1.0
+ * @version 1.0
  */
 public enum Versions {
 
@@ -32,10 +33,19 @@ public enum Versions {
         this.number = number;
     }
 
+    /**
+     * @since 1.0
+     * @return Returns the version protocol number.
+     */
     public int getNumber() {
         return this.number;
     }
 
+    /** Get the corresponding enumeration from the string.
+     * @since 1.0
+     * @param str The targeted string.
+     * @return Returns the corresponding enumeration if it exists otherwise returns null.
+     */
     public static Versions fromString(String str) {
         Versions[] versions;
 
@@ -49,6 +59,10 @@ public enum Versions {
         return null;
     }
 
+    /**
+     * @since 1.0
+     * @return Returns the enumeration corresponding to the current version.
+     */
     public static Versions getCurrent() {
         String packageName = Bukkit.getServer().getClass().getPackage().getName();
 

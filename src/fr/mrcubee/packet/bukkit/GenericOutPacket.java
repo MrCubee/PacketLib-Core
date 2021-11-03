@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 /**
  * @author MrCubee
  * @since 1.0
+ * @version 1.0
  */
 public interface GenericOutPacket extends GenericPacket {
 

@@ -3,6 +3,7 @@ package fr.mrcubee.packet.bukkit;
 /**
  * @author MrCubee
  * @since 1.0
+ * @version 1.0
  */
 public enum Packets {
 
@@ -121,22 +122,44 @@ public enum Packets {
         this.direction = direction;
     }
 
+    /** Returns the direction of the packet. Client to server (IN) or server to client (OUT).
+     * @since 1.0
+     * @return Return packet direction.
+     */
     public PacketDirection getDirection() {
         return this.direction;
     }
 
+    /**
+     * @since 1.0
+     * @return Returns the name of the NMS packet class.
+     */
     public String getClassName() {
         return this.className;
     }
 
+    /** Get the generic packet class in a specific version.
+     * @since 1.0
+     * @param version Desired version.
+     * @return Returns the class if it exists otherwise returns null.
+     */
     public Class<? extends GenericPacket> getCraftGenericPacketClass(Versions version) {
         return CraftClass.getCraftClass(GenericClass.getGenericPacketClass(this), version);
     }
 
+    /** Get the generic packet class in the current version.
+     * @since 1.0
+     * @return Returns the generic packet class if it exists otherwise returns null.
+     */
     public Class<? extends GenericPacket> getCraftGenericPacketClass() {
         return getCraftGenericPacketClass(Versions.getCurrent());
     }
 
+    /** Get the NMS packet class in a specific version.
+     * @since 1.0
+     * @param version Desired version.
+     * @return Returns the NMS packet class if it exists otherwise returns null.
+     */
     public Class<?> getPacketClass(Versions version) {
         Class<?> clazz = null;
 
@@ -148,18 +171,38 @@ public enum Packets {
         return clazz;
     }
 
+    /** Get the NMS packet class in the current version.
+     * @since 1.0
+     * @return Returns the NMS packet class if it exists otherwise returns null.
+     */
     public Class<?> getPacketClass() {
         return getPacketClass(Versions.getCurrent());
     }
 
+    /** Create an instance of the desired generic packet in a specific version.
+     * @since 1.0
+     * @param version Desired version.
+     * @param parameters Constructor parameters of the desired generic packet.
+     * @return Returns the generic package instance if its class exists otherwise returns null.
+     */
     public GenericPacket createPacket(Versions version, Object... parameters) {
         return CraftClass.newInstance(GenericClass.getGenericPacketClass(this), version, parameters);
     }
 
+    /** Create an instance of the desired generic packet in the current version.
+     * @since 1.0
+     * @param parameters  Constructor parameters of the desired generic packet.
+     * @return Returns the generic package instance if its class exists otherwise returns null.
+     */
     public GenericPacket createPacket(Object... parameters) {
         return createPacket(Versions.getCurrent(), parameters);
     }
 
+    /** Get the enumeration corresponding to the name of the NMS packet class.
+     * @since 1.0
+     * @param className Name of the NMS packet class.
+     * @return Returns the enumeration corresponding to the name of the NMS packet class.
+     */
     public static Packets fromClassName(String className) {
         Packets[] packets;
 
@@ -173,7 +216,12 @@ public enum Packets {
         return null;
     }
 
-    public static Packets getFromGenericPacketClass(Class<?> clazz) {
+    /** Get the enumeration corresponding to the generic packet class.
+     * @since 1.0
+     * @param clazz The generic packet class.
+     * @return
+     */
+    public static Packets getFromGenericPacketClass(Class<? extends GenericPacket> clazz) {
         if (clazz == null)
             return null;
         return fromClassName(clazz.getName().substring(clazz.getName().lastIndexOf('.') + 1));

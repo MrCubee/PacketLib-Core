@@ -1,7 +1,17 @@
 package fr.mrcubee.packet.bukkit;
 
+/**
+ * @author MrCubee
+ * @since 1.0
+ * @version 1.0
+ */
 public class GenericClass {
 
+    /** Retrives the generic packet class in a specific version.
+     * @since 1.0
+     * @param packet Desired packet.
+     * @return Returns the desired packet class if it exists otherwise returns null.
+     */
     public static Class<? extends GenericPacket> getGenericPacketClass(Packets packet) {
         Class<?> unknownClass = null;
 
