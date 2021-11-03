@@ -121,19 +121,12 @@ public enum Packets {
         return this.className;
     }
 
-    public Class<?> getGenericPacketClass(Versions version) {
-        Class<?> clazz = null;
-
-        if (version == null)
-            return null;
-        try {
-            clazz = Class.forName("fr.mrcubee.bukkit.packet." + version.toString() + ".CraftGeneric" + getClassName());
-        } catch (ClassNotFoundException ignored) {}
-        return clazz;
+    public Class<? extends GenericPacket> getCraftGenericPacketClass(Versions version) {
+        return CraftClass.getCraftClass(GenericClass.getGenericPacketClass(this), version);
     }
 
-    public Class<?> getGenericPacketClass() {
-        return getGenericPacketClass(Versions.getCurrent());
+    public Class<? extends GenericPacket> getCraftGenericPacketClass() {
+        return getCraftGenericPacketClass(Versions.getCurrent());
     }
 
     public Class<?> getPacketClass(Versions version) {
@@ -142,7 +135,7 @@ public enum Packets {
         if (version == null)
             return null;
         try {
-            clazz = Class.forName("net.minecraft.server." + version.toString() + "." + getClassName());
+            clazz = Class.forName(String.format("net.minecraft.server.%s.%s", version, getClassName()));
         } catch (ClassNotFoundException ignored) {}
         return clazz;
     }
@@ -151,20 +144,12 @@ public enum Packets {
         return getPacketClass(Versions.getCurrent());
     }
 
-    public GenericPacket createPacket(Versions version) {
-        Class<?> clazz = getGenericPacketClass(version);
-        GenericPacket genericPacket = null;
-
-        if (clazz == null)
-            return null;
-        try {
-            genericPacket = (GenericPacket) clazz.newInstance();
-        } catch (Exception ignored) {}
-        return genericPacket;
+    public GenericPacket createPacket(Versions version, Object... parameters) {
+        return CraftClass.newInstance(GenericClass.getGenericPacketClass(this), version, parameters);
     }
 
-    public GenericPacket createPacket() {
-        return createPacket(Versions.getCurrent());
+    public GenericPacket createPacket(Object... parameters) {
+        return createPacket(Versions.getCurrent(), parameters);
     }
 
     public static Packets fromClassName(String className) {
