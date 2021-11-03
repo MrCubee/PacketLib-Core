@@ -6,6 +6,9 @@ package fr.mrcubee.packet.bukkit;
  */
 public enum Packets {
 
+    LOGIN_IN_START("PacketLoginInStart", PacketDirection.IN),
+    LOGIN_IN_ENCRYPTION_BEGIN("PacketLoginInEncryptionBegin", PacketDirection.IN),
+
     PLAY_IN_ABILITIES("PacketPlayInAbilities", PacketDirection.IN),
     PLAY_IN_ARM_ANIMATION("PacketPlayInArmAnimation", PacketDirection.IN),
     PLAY_IN_BLOCK_DIG("PacketPlayInBlockDig", PacketDirection.IN),
@@ -29,6 +32,11 @@ public enum Packets {
     PLAY_IN_UPDATE_SIGN("PacketPlayInUpdateSign", PacketDirection.IN),
     PLAY_IN_USE_ENTITY("PacketPlayInUseEntity", PacketDirection.IN),
     PLAY_IN_WINDOW_CLICK("PacketPlayInWindowClick", PacketDirection.IN),
+
+    LOGIN_OUT_ENCRYPTION_BEGIN("PacketLoginOutEncryptionBegin", PacketDirection.OUT),
+    LOGIN_OUT_SUCCESS("PacketLoginOutSuccess", PacketDirection.OUT),
+    LOGIN_OUT_DISCONNECT("PacketLoginOutDisconnect", PacketDirection.OUT),
+    LOGIN_OUT_SET_COMPRESSION("PacketLoginOutSetCompression", PacketDirection.OUT),
 
     PLAY_OUT_ABILITIES("PacketPlayOutAbilities", PacketDirection.OUT),
     PLAY_OUT_ANIMATION("PacketPlayOutAnimation", PacketDirection.OUT),
